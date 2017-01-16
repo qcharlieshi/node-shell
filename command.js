@@ -27,8 +27,6 @@ module.exports = {
         fs.readdir('.', function(err, files) {
             if (err) throw err;
             
-            //process.stdout.write('\n');
-
             files.forEach(function(file) {
                 newString += (file.toString() + ' ');
                 
@@ -54,11 +52,20 @@ module.exports = {
     head: function(string, length) {
 
     },
-    curl: function() {
+    curl: function(string) {
+        console.log(string);
+        request(string, function (err, response, body) {
+            if (err) { console.log(err); throw err; }
 
+            //console.log(response);
+            if (response.statusCode === 200) {
+                done(body)// Show the HTML for the Google homepage. 
+            }
+        })
     }
 }
 
+''.split.call(data)
 
 
 
