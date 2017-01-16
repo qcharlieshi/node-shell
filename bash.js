@@ -4,21 +4,29 @@ process.stdout.write('prompt > ');
 // The stdin 'data' event fires after a user types in a line
 
 let commands = require('./command.js');
-//let userInput = '';
 
 
 
 process.stdin.on('data', function (data) {
-  let cmd = data.toString().trim(); // remove the newline
+    let cmd = data.toString().trim(); // remove the newline
 
-  commands[cmd]();
 
-//   switch(cmd) {
-//       case 'pwd': commands[]
-//   }
+    if (cmd.indexOf(' ') !== -1) {
+        let splitStringAry = cmd.split(' ');
+        
+        //commands[splitStringAry.shift()](splitStringAry.join(' '));
+        //console.log(...splitStringAry + " ary log ");
+        commands[splitStringAry.shift()](...splitStringAry);
+        
+    } else {
+        commands[cmd]();
+    }
 
-  //process.stdout.write('You typed: ' + cmd);
-  process.stdout.write('\nprompt > ');
+    
+
+    setTimeout(function () {
+        process.stdout.write('\nprompt > ');
+    }, 1000);
 
 });
 
